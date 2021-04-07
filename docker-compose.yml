@@ -1,0 +1,17 @@
+version: '3'
+services: 
+    dynamodb-api:
+        container_name: dynamodb-api
+        image: amazon/dynamodb-local
+        ports: 
+            - '8000:8000'
+    apis:
+        container_name: node-api
+        build: .
+        ports: 
+            - '3000:3000'
+        volumes: 
+            - ./:/usr/app/
+        links: 
+            - dynamodb-api
+
